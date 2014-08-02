@@ -129,7 +129,7 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 5  //1 for E3D v5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 1
@@ -203,10 +203,15 @@
 //    #define  DEFAULT_Ki 0.77
 //    #define  DEFAULT_Kd 114.70
     
-//Prusa i3 kit E3D un-insulated
-    #define  DEFAULT_Kp 9.67
-    #define  DEFAULT_Ki 0.44
-    #define  DEFAULT_Kd 53.22
+//Prusa i3 kit E3Dv5 un-insulated
+//#define  DEFAULT_Kp 9.67
+//#define  DEFAULT_Ki 0.44
+//#define  DEFAULT_Kd 53.22
+
+//Prusa i3 kit E3Dv6 un-insulated, 210C
+#define  DEFAULT_Kp 21.72
+#define  DEFAULT_Ki 2.55
+#define  DEFAULT_Kd 46.26
 #endif // PIDTEMP
 
 // Bed Temperature Control
@@ -356,7 +361,7 @@ offsets < 1 mm.
 #define ENABLE_MANUAL_BED_LEVELING
 
 #ifdef ENABLE_MANUAL_BED_LEVELING
-  #define Z_RAISE_BEFORE_MOVING 1       // (in mm) Raise Z before moving to next corner
+  #define Z_RAISE_BEFORE_MOVING 3       // (in mm) Raise Z before moving to next corner
                                         
   #define XY_TRAVEL_SPEED 4000         // X and Y axis travel speed between probes, in mm/min
 
@@ -365,9 +370,9 @@ offsets < 1 mm.
 #endif
 
 // Travel limits after homing
-#define X_MAX_POS 190
+#define X_MAX_POS 200
 #define X_MIN_POS 0
-#define Y_MAX_POS 183
+#define Y_MAX_POS 200
 #define Y_MIN_POS 0
 #define Z_MAX_POS 200
 #define Z_MIN_POS 0
@@ -487,7 +492,10 @@ offsets < 1 mm.
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {78.7402,78.7402,200.0*8/3,760*1.1}  // default steps per unit for Ultimaker
 //#define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 //#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,734 } /*100*700/95.4 for 2.85 mm Kiwi Green PLA*/ // X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,734 } //Rework Wades /*100*700/95.4 for 2.85 mm Kiwi Green PLA*/ // X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,377.25} //200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, 10.8 hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,412.5} //Measured 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, 10.8 hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,674} //Measured 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, Mk8 6.7 mm hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
 #define DEFAULT_MAX_FEEDRATE          {400, 400, 2, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {5000,5000,50,5000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
@@ -524,12 +532,12 @@ offsets < 1 mm.
 
 // Preheat Constants
 #define PLA_PREHEAT_HOTEND_TEMP 180
-#define PLA_PREHEAT_HPB_TEMP 70
-#define PLA_PREHEAT_FAN_SPEED 255   // Insert Value between 0 and 255
+#define PLA_PREHEAT_HPB_TEMP 65
+#define PLA_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
 #define ABS_PREHEAT_HOTEND_TEMP 240
-#define ABS_PREHEAT_HPB_TEMP 100
-#define ABS_PREHEAT_FAN_SPEED 255   // Insert Value between 0 and 255
+#define ABS_PREHEAT_HPB_TEMP 110
+#define ABS_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
 //LCD and SD support
 //#define ULTRA_LCD  //general LCD support, also 16x2

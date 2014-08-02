@@ -956,11 +956,17 @@ static void do_blocking_move_relative(float offset_x, float offset_y, float offs
     do_blocking_move_to(current_position[X_AXIS] + offset_x, current_position[Y_AXIS] + offset_y, current_position[Z_AXIS] + offset_z);
 }
 
-void blocking_raised_move_to(float x, float y) 
+void blocking_raised_move_to(float x, float y)
 {
-do_blocking_move_relative(0,0,Z_RAISE_BEFORE_MOVING);
-do_blocking_move_to(x,y,current_position[Z_AXIS]);
-do_blocking_move_relative(0,0,-Z_RAISE_BEFORE_MOVING);
+    do_blocking_move_relative(0,0,Z_RAISE_BEFORE_MOVING);
+    do_blocking_move_to(x,y,current_position[Z_AXIS]);
+    do_blocking_move_relative(0,0,-Z_RAISE_BEFORE_MOVING);
+}
+
+void blocking_move_to_park(float x, float y)
+{
+    do_blocking_move_relative(0,0,2*Z_RAISE_BEFORE_MOVING);
+    do_blocking_move_to(x,y,current_position[Z_AXIS]);
 }
 
 #endif
@@ -2749,16 +2755,18 @@ void process_commands()
         lastpos[Z_AXIS]=current_position[Z_AXIS];
         lastpos[E_AXIS]=current_position[E_AXIS];
         //retract by E
+        float first_retract = 0.0;
         if(code_seen('E'))
         {
-          target[E_AXIS]+= code_value();
+          first_retract = code_value();
         }
         else
         {
           #ifdef FILAMENTCHANGE_FIRSTRETRACT
-            target[E_AXIS]+= FILAMENTCHANGE_FIRSTRETRACT ;
+            first_retract = FILAMENTCHANGE_FIRSTRETRACT ;
           #endif
         }
+        target[E_AXIS]+= first_retract;
         plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], feedrate/60, active_extruder);
 
         //lift Z
@@ -2823,7 +2831,7 @@ void process_commands()
         while(!lcd_clicked()){
           cnt++;
           manage_heater();
-          manage_inactivity();
+//CDA commented out          manage_inactivity();
           lcd_update();
           if(cnt==0)
           {
@@ -2855,7 +2863,11 @@ void process_commands()
             target[E_AXIS]+=(-1)*FILAMENTCHANGE_FINALRETRACT ;
           #endif
         }
-        current_position[E_AXIS]=target[E_AXIS]; //the long retract of L is compensated by manual filament feeding
+        target[E_AXIS]-= first_retract; //subtracting a -ve number
+        #ifdef FILAMENTCHANGE_PRIME
+        target[E_AXIS]-= FILAMENTCHANGE_PRIME; //subtracting a +ve number so final unretract below does small prime in returning to lastpos[E_AXIS].
+        #endif
+        current_position[E_AXIS]=target[E_AXIS]; //both the long retract of L and the first retract are compensated by manual filament feeding
         plan_set_e_position(current_position[E_AXIS]);
         plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], feedrate/60, active_extruder); //should do nothing
         plan_buffer_line(lastpos[X_AXIS], lastpos[Y_AXIS], target[Z_AXIS], target[E_AXIS], feedrate/60, active_extruder); //move xy back

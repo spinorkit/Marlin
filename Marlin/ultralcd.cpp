@@ -767,6 +767,11 @@ static void lcd_move_to_center()
     blocking_raised_move_to((X_MAX_POS+X_MIN_POS)/2,(Y_MAX_POS+Y_MIN_POS)/2);	
 }
 
+static void lcd_park()
+{
+    blocking_move_to_park(X_MAX_POS, Y_MAX_POS);
+}
+
 static void lcd_move_z_fine()
 {
    move_menu_scale = 0.02;
@@ -799,6 +804,7 @@ static void lcd_adjust_z0_menu()
     #ifdef EEPROM_SETTINGS
     MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
     #endif
+    MENU_ITEM(function, MSG_PARK, lcd_park);
     END_MENU();
 
     if(currentMenu == lcd_adjust_z0_menu)

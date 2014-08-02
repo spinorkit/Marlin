@@ -249,6 +249,7 @@ extern void digipot_i2c_init();
 
 #ifdef ENABLE_MANUAL_BED_LEVELING
 extern void blocking_raised_move_to(float x, float y);
+extern void blocking_move_to_park(float x, float y);
 #endif
 
 #endif
