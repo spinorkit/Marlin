@@ -365,7 +365,7 @@ offsets < 1 mm.
                                         
   #define XY_TRAVEL_SPEED 4000         // X and Y axis travel speed between probes, in mm/min
 
-  #define INSET_FROM_MAXMIN 0           //When moving to the corners, stop a little short of X_MAX_POS etc.
+  #define INSET_FROM_MAXMIN 10           //When moving to the corners, stop a little short of X_MAX_POS etc.
 
 #endif
 
