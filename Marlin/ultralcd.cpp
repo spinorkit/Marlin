@@ -787,9 +787,15 @@ static void lcd_move_z_fine()
 //Set the current position to be Z0, by adjusting homeing[Z_AXIS] in a similar fashion to M206 Znn
 static void lcd_set_z0_here()
 {
+#ifdef ENABLE_AUTO_BED_LEVELING
+   zprobe_zoffset -= current_position[Z_AXIS];
+   current_position[Z_AXIS] = 0;
+   plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+#else
    add_homeing[Z_AXIS] -= current_position[Z_AXIS];
    current_position[Z_AXIS] = 0;
    plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+#endif
 }
 
 
