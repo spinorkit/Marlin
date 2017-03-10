@@ -1068,7 +1068,7 @@ static float probe_pt(float x, float y, float z_before) {
   SERIAL_PROTOCOLPGM(" y: ");
   SERIAL_PROTOCOL(y);
   SERIAL_PROTOCOLPGM(" z: ");
-  SERIAL_PROTOCOL(measured_z);
+  SERIAL_PROTOCOL_F(measured_z,3);
   SERIAL_PROTOCOLPGM("\n");
   return measured_z;
 }
@@ -1657,7 +1657,7 @@ void process_commands()
             SERIAL_PROTOCOLPGM(" Y: ");
             SERIAL_PROTOCOL(current_position[Y_AXIS]);
             SERIAL_PROTOCOLPGM(" Z: ");
-            SERIAL_PROTOCOL(current_position[Z_AXIS]);
+            SERIAL_PROTOCOL_F(current_position[Z_AXIS],3);
             SERIAL_PROTOCOLPGM("\n");
 
             clean_up_after_endstop_move();
