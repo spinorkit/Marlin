@@ -397,7 +397,7 @@ offsets < 1 mm.
 #define ENABLE_FIRMWARE_ADJUST_Z0  //Uncomment to enable the Adjust Z0 menu (under Prepare)
 
 #ifdef ENABLE_FIRMWARE_ADJUST_Z0
-#define Z_MAX_TRAVEL_PAST_ENDSTOP_MM 1  //Allow Z0 to be up to this distance below min z endstop, even though min_software_endstops is true.
+#define Z_MAX_TRAVEL_PAST_ENDSTOP_MM 1.5  //Allow Z0 to be up to this distance below min z endstop, even though min_software_endstops is true.
 #else
 #define Z_MAX_TRAVEL_PAST_ENDSTOP_MM 0
 #endif
