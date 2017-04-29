@@ -540,7 +540,8 @@ offsets < 1 mm.
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,377.25} //200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, 10.8 hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,412.5} //Measured 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, 10.8 hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,674} //Measured 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, Mk8 6.7 mm hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,632.8} //Calibrated 12 Jan 2017 674*(110mm-3.5mm)/100mm. 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, Mk8 6.7 mm hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,632.8} //20T, 5mm rods,Calibrated 12 Jan 2017 674*(110mm-3.5mm)/100mm. 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, Mk8 6.7 mm hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,1600,632.8} //20T, 2mm pitch lead screws,Calibrated 12 Jan 2017 674*(110mm-3.5mm)/100mm. 200*16*32/(8*3.1415926*10.8) } // Prusa Compact 8 to 32 gears, Mk8 6.7 mm hobbed pulley// X, Y, Z, E steps per unit - Metric Prusa Mendel with Wade extruder:
 #define DEFAULT_MAX_FEEDRATE          {400, 400, 2, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {5000,5000,50,5000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
